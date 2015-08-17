@@ -16,23 +16,29 @@ func Bool(b bool) string {
 func OrdinalLiteral(n int) string {
 	var suffix string
 
-	switch absInt(n) % 10 {
-	case 1:
-		suffix = "st"
-	case 2:
-		suffix = "nd"
-	case 3:
-		suffix = "rd"
-	default:
+	sign, n := absInt(n)
+
+	if d := n % 100; d > 3 && d <= 20 {
 		suffix = "th"
+	} else {
+		switch n % 10 {
+		case 1:
+			suffix = "st"
+		case 2:
+			suffix = "nd"
+		case 3:
+			suffix = "rd"
+		default:
+			suffix = "th"
+		}
 	}
 
-	return fmt.Sprintf("%d%s", n, suffix)
+	return fmt.Sprintf("%s%d%s", sign, n, suffix)
 }
 
-func absInt(n int) int {
+func absInt(n int) (string, int) {
 	if n < 0 {
-		return -n
+		return "-", -n
 	}
-	return n
+	return "", n
 }
