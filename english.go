@@ -36,6 +36,18 @@ func OrdinalLiteral(n int) string {
 	return fmt.Sprintf("%s%d%s", sign, n, suffix)
 }
 
+// Plural is a simple utility which takes a word and a quantity, and returns
+// the pluralized version of the word if necessary. It doesn’t support special
+// cases (e.g. Plural("woman", 2) will return "womans") but makes code more
+// readable in the general case.
+func Plural(s string, n int) string {
+	if _, n = absInt(n); n != 1 {
+		return s + "s"
+	}
+
+	return s
+}
+
 func absInt(n int) (string, int) {
 	if n < 0 {
 		return "-", -n

@@ -37,3 +37,12 @@ func TestOrdinalLiteral(t *testing.T) {
 	assert.Equal(t, "-3rd", english.OrdinalLiteral(-3))
 	assert.Equal(t, "-4th", english.OrdinalLiteral(-4))
 }
+
+func TestPlural(t *testing.T) {
+	assert.Equal(t, "foos", english.Plural("foo", 2))
+	assert.Equal(t, "foos", english.Plural("foo", -2))
+	assert.Equal(t, "fooss", english.Plural("foos", 421))
+	assert.Equal(t, "foos", english.Plural("foo", 0))
+	assert.Equal(t, "foo", english.Plural("foo", 1))
+	assert.Equal(t, "foo", english.Plural("foo", -1))
+}
